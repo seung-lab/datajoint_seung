@@ -184,3 +184,25 @@ class EASETuning(dj.Computed):
 
     self.insert1(key)
     print("Computed tuning curve for cell {segment_id} in scan {scan_id}".format(**key))
+
+
+@pinky
+class Segment(dj.Manual):
+  definition = """
+  # Segments
+  version: int
+  segment_id: bigint unsigned
+  """
+
+
+@pinky
+class Mesh(dj.Manual):
+  definition = """
+  # Segment meshes
+  -> Segment
+  ---
+  n_vertices: int
+  n_triangles: int
+  vertices: longblob
+  triangles: longblob
+  """
