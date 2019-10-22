@@ -2,11 +2,33 @@
 Datajoint databases in Seung Lab.
 
 ## Database configuration
-Database location: Princeton Neuroscience Institute
+Database location: Princeton Neuroscience Institute, Princeton University
 
 - HOST: seungdj01.princeton.edu
 - USER: Your Princeton net id (ex. jabae)
 - PASSWORD: Your Princeton net id password
+
+*You have to be affiliated with Princeton University to access the database.
+
+### Accessing the database
+```python3
+import datajoint as dj
+
+# Datajoint credentials
+dj.config["database.host"] = "seungdj01.princeton.edu"
+dj.config["database.user"] = "your_netid"
+dj.config["database.password"] = "your_netid_pw"
+
+dj.conn()
+```
+
+or
+
+```python3
+dj.config.load("dj_conf.json")
+
+dj.conn()
+```
 
 #### dj_conf.json
 ```
