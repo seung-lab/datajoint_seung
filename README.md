@@ -56,4 +56,4 @@ dj.conn()
 
 ## Pinky
 ### Schema ERD
-![](ERD/pinky_ERD.png)
+![](pinky/pinky_ERD.png)
