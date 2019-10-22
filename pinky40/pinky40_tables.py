@@ -5,10 +5,10 @@ from utils import get_section
 
 
 # Schema pinky
-pinky = dj.schema("Seung_pinky")
+pinky40 = dj.schema("Seung_pinky40")
 
 
-@pinky
+@pinky40
 class Scan(dj.Manual):
   definition = """
   # Functional scan
@@ -20,7 +20,7 @@ class Scan(dj.Manual):
   """
     
 
-@pinky
+@pinky40
 class Slice(dj.Manual):
   definition = """
   # Slices within scan
@@ -31,16 +31,17 @@ class Slice(dj.Manual):
   """
 
 
-@pinky
+@pinky40
 class Neuron(dj.Manual):
   definition = """
   # Cells
-  segment_id: bigint unsigned
+  segment_id: int
   manual_id: int
+  ease_id: int
   """
 
 
-@pinky
+@pinky40
 class ManualMask(dj.Manual):
   definition = """
   # Manual masks
@@ -51,7 +52,7 @@ class ManualMask(dj.Manual):
   """
 
 
-@pinky
+@pinky40
 class EASEMask(dj.Manual):
   definition = """
   # EASE masks
@@ -62,7 +63,7 @@ class EASEMask(dj.Manual):
   """
 
 
-@pinky
+@pinky40
 class Stimulus(dj.Manual):
   definition = """
   # Visual stimulus
@@ -73,7 +74,7 @@ class Stimulus(dj.Manual):
   """
 
 
-@pinky
+@pinky40
 class ManualTrace(dj.Manual):
   definition = """
   # Traces from manual masks
@@ -83,20 +84,19 @@ class ManualTrace(dj.Manual):
   """
   
 
-@pinky
+@pinky40
 class EASETrace(dj.Manual):
   definition = """
   # Traces from EASE masks
   -> Scan
   -> Neuron
   ---
-  trace_raw: longblob
   trace: longblob
-  spike: longblob
+  trace_denoised: longblob
   """
 
 
-@pinky
+@pinky40
 class ManualTuning(dj.Computed):
   definition = """
   # Tuning curve from manual masks
@@ -141,7 +141,7 @@ class ManualTuning(dj.Computed):
     print("Computed tuning curve for cell {manual_id} in scan {scan_id}, slice {slice_idx}".format(**key))
 
 
-@pinky
+@pinky40
 class EASETuning(dj.Computed):
   definition = """
   # Tuning curve from EASE masks
@@ -183,4 +183,4 @@ class EASETuning(dj.Computed):
     key["tuning_curve"] = tuning[0,:]
 
     self.insert1(key)
-    print("Computed tuning curve for cell {segment_id} in scan {scan_id}".format(**key))
+    print("Computed tuning curve for cell {ease_id} in scan {scan_id}".format(**key))
