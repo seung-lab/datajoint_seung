@@ -73,9 +73,9 @@ dj.conn()
     - `condition`: Angle of the visual stimulus (length 27100 vector). Angles range between 0&deg; and 360&deg; with resolution of 22.5&deg;. The directions of the stimulus is pseudorandomly-ordered.
     
 - Neuron: Cells in pinky40.
-    - `segment id`: Segment id in `gs://neuroglancer/pinky40_v11/watershed_mst_smc_sem5_remap`
-    - `manual id`: Id of manual masks drawn by Jake.
-    - `ease id`: Segment id from the EASE result.
+    - `segment_id`: Segment id in `gs://neuroglancer/pinky40_v11/watershed_mst_smc_sem5_remap`
+    - `manual_id`: Id of manual masks drawn by Jake.
+    - `ease_id`: Segment id from the EASE result.
     
 - ManualMask: Manual masks.
 
@@ -110,9 +110,9 @@ dj.conn()
     - `movie`: Visual stimulus (90 x 160 x 27100 array). Time resolution is 14.83 frame/s. 
     - `condition`: Angle of the visual stimulus (length 27100 vector). Angles range between 0&deg; and 360&deg; with resolution of 22.5&deg;. The directions of the stimulus is pseudorandomly-ordered.
     
-- Neuron: Cells in pinky40.
-    - `segment id`: Segment id in materialization `v179`.
-    - `manual id`: Id of manual masks drawn by Jake.
+- Neuron: Cells in pinky100.
+    - `segment_id`: Segment id in materialization `v179`.
+    - `manual_id`: Id of manual masks drawn by Jake.
     
 - ManualMask: Manual masks.
 
@@ -125,3 +125,13 @@ dj.conn()
 - EASETrace: Traces from EASE masks.
 
 - EASETuning: Tuning curve computed from EASE trace.
+
+- Segment: Segments with 10 or more synapses in pinky100.
+    - `segment_id`: Segment id in materialization `v179`.
+    - `manual_id`: Id of manual masks.
+
+- Mesh: Meshes of segments.
+    - `n_vertices`: Number of vertices.
+    - `n_triangles`: Number of triangles.
+    - `vertices`: Mesh vertices [nm].
+    - `triangles`: Triangle connectivity (python indexing).
