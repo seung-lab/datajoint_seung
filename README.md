@@ -52,6 +52,10 @@ dj.conn()
 ```
 
 ## Pinky40
+```
+pinky40 = dj.create_virtual_module("Seung_pinky40", "Seung_pinky40")
+```
+
 ### Schema ERD
 ![](pinky40/pinky40_ERD.png)
 
@@ -78,6 +82,7 @@ dj.conn()
     - `ease_id`: Segment id from the EASE result.
     
 - ManualMask: Manual masks.
+    - `mask`: ROI mask (256 x 256 array). It matches the size of each functional video frame.
 
 - ManualTrace: Traces from manual masks.
 
@@ -90,6 +95,10 @@ dj.conn()
 - EASETuning: Tuning curve computed from EASE trace.
 
 ## Pinky
+```
+pinky = dj.create_virtual_module("Seung_pinky", "Seung_pinky")
+```
+
 ### Schema ERD
 ![](pinky/pinky_ERD.png)
 
@@ -115,6 +124,7 @@ dj.conn()
     - `manual_id`: Id of manual masks drawn by Jake.
     
 - ManualMask: Manual masks.
+    - `mask`: ROI mask (256 x 256 array). It matches the size of each functional video frame.
 
 - ManualTrace: Traces from manual masks.
 
