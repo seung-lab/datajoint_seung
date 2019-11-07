@@ -34,7 +34,7 @@ class Slice(dj.Manual):
 @pinky
 class Neuron(dj.Manual):
   definition = """
-  # Cells
+  # Cells with soma
   segment_id: bigint unsigned
   manual_id: int
   """
@@ -43,7 +43,7 @@ class Neuron(dj.Manual):
 @pinky
 class ManualMask(dj.Manual):
   definition = """
-  # Manual masks
+  # Manual ROI masks
   -> Slice
   -> Neuron
   ---
@@ -54,7 +54,7 @@ class ManualMask(dj.Manual):
 @pinky
 class EASEMask(dj.Manual):
   definition = """
-  # EASE masks
+  # EASE ROI masks
   -> Slice
   -> Neuron
   ---
@@ -79,7 +79,8 @@ class ManualTrace(dj.Manual):
   # Traces from manual masks
   -> ManualMask
   ---
-  trace: longblob
+  trace_raw: longblob
+  trace_detrend: longblob
   """
   
 
@@ -99,7 +100,7 @@ class EASETrace(dj.Manual):
 @pinky
 class ManualTuning(dj.Computed):
   definition = """
-  # Tuning curve from manual masks
+  # Tuning curve of manual traces
   -> ManualTrace
   -> Stimulus
   ---
@@ -144,7 +145,7 @@ class ManualTuning(dj.Computed):
 @pinky
 class EASETuning(dj.Computed):
   definition = """
-  # Tuning curve from EASE masks
+  # Tuning curve of EASE traces
   -> EASETrace
   -> Stimulus
   ---
