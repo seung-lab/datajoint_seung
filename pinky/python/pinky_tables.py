@@ -187,11 +187,21 @@ class EASETuning(dj.Computed):
     print("Computed tuning curve for cell {segment_id} in scan {scan_id}".format(**key))
 
 
+@pinky 
+class Segmentation(dj.Manual):
+  definition = """
+  # Segmentation information
+  segmentation: smallint
+  ---
+  timestamp: timestamp
+  """
+
+
 @pinky
 class Segment(dj.Manual):
   definition = """
   # Segments
-  version: int
+  -> Segmentation
   segment_id: bigint unsigned
   """
 
@@ -206,4 +216,48 @@ class Mesh(dj.Manual):
   n_triangles: int
   vertices: longblob
   triangles: longblob
+  """
+
+
+@pinky
+class VoxelizedMesh(dj.Computed):
+  definition = """
+  # Voxelized meshes
+  -> Segment
+  ---
+  n_fragments: int
+  n_voxels: int
+  n_vertices: int
+  n_faces: int
+  indices: longblob
+  """
+
+  def _make_tuples(self, key):
+    pass
+
+
+@pinky
+class FootprintsEM(dj.Computed):
+  definition = """
+  # EM footprints
+  -> Segment
+  -> Blurs
+  ---
+  n_voxels: bigint
+  idx_value: longblob
+  """
+
+  def _make_tuples(self, key):
+    pass
+
+
+@pinky
+class Blurs(dj.Manual):
+  definition = """
+  # Gaussian blur information
+  version: smallint
+  ---
+  zblur: smallint
+  hash: bigint unsigned
+  zvals: blob
   """
