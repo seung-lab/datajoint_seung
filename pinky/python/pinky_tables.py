@@ -81,6 +81,7 @@ class ManualTrace(dj.Manual):
   ---
   trace_raw: longblob
   trace_detrend: longblob
+  trace_dff: longblob 
   """
   
 
