@@ -41,6 +41,18 @@ class Neuron(dj.Manual):
 
 
 @pinky
+class Soma(dj.Manual):
+  definition = """
+  # Soma information
+  -> Neuron
+  ---
+  soma_x: int
+  soma_y: int
+  soma_z: int
+  """
+
+
+@pinky
 class ManualMask(dj.Manual):
   definition = """
   # Manual ROI masks
