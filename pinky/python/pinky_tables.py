@@ -31,10 +31,21 @@ class Slice(dj.Manual):
   """
 
 
+@pinky 
+class Segmentation(dj.Manual):
+  definition = """
+  # Segmentation information
+  segmentation: smallint
+  ---
+  timestamp: timestamp
+  """
+
+
 @pinky
 class Neuron(dj.Manual):
   definition = """
   # Cells with soma
+  -> Segmentation
   segment_id: bigint unsigned
   manual_id: int
   """
@@ -198,16 +209,6 @@ class EASETuning(dj.Computed):
 
     self.insert1(key)
     print("Computed tuning curve for cell {segment_id} in scan {scan_id}".format(**key))
-
-
-@pinky 
-class Segmentation(dj.Manual):
-  definition = """
-  # Segmentation information
-  segmentation: smallint
-  ---
-  timestamp: timestamp
-  """
 
 
 @pinky

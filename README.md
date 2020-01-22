@@ -120,7 +120,7 @@ pinky = dj.create_virtual_module("Seung_pinky", "Seung_pinky")
     - `condition`: Angle of the visual stimulus (length 27100 vector). Angles range between 0&deg; and 360&deg; with resolution of 22.5&deg;. The directions of the stimulus is pseudorandomly-ordered.
     
 - Neuron: Cells in pinky100.
-    - `segment_id`: Segment id in materialization `v179`.
+    - `segment_id`: Segment id in materialization `v185`.
     - `manual_id`: Id of manual masks drawn by Jake.
     
 - ManualMask: Manual masks.
@@ -137,7 +137,7 @@ pinky = dj.create_virtual_module("Seung_pinky", "Seung_pinky")
 - EASETuning: Tuning curve computed from EASE trace.
 
 - Segment: Segments with 10 or more synapses in pinky100.
-    - `segment_id`: Segment id in materialization `v179`.
+    - `segment_id`: Segment id in materialization `v185`.
     - `manual_id`: Id of manual masks.
 
 - Mesh: Meshes of segments.
