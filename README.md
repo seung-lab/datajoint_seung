@@ -123,10 +123,18 @@ pinky = dj.create_virtual_module("Seung_pinky", "Seung_pinky")
     - `segment_id`: Segment id in materialization `v185`.
     - `manual_id`: Id of manual masks drawn by Jake.
     
+- Soma: Soma information.
+    - `soma_x`: Soma x-axis location [nm]
+    - `soma_y`: Soma y-axis location [nm]
+    - `soma_z`: Soma z-axis location [nm]
+    
 - ManualMask: Manual masks.
     - `mask`: ROI mask (256 x 256 array). It matches the size of each functional video frame.
 
 - ManualTrace: Traces from manual masks.
+    - `trace_raw`: Raw traces.
+    - `trace_detrend`: Detrended traces by high-pass filter.
+    - `trace_dff`: Normalized traces (dF/F) where F is the mean of the first Gaussian fit when fitted with mixture of Gaussians of two.
 
 - ManualTuning: Tuning curve computed from manual trace.
 
