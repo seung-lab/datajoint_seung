@@ -125,7 +125,7 @@ class EASETrace(dj.Manual):
 @pinky
 class ManualTuning(dj.Computed):
   definition = """
-  # Tuning curve from manual masks
+  # Tuning curve from manual traces
   -> ManualTrace
   -> Stimulus
   ---
@@ -195,7 +195,7 @@ class ManualTuning(dj.Computed):
 @pinky
 class EASETuning(dj.Computed):
   definition = """
-  # Tuning curve from EASE masks
+  # Tuning curve from EASE traces
   -> EASETrace
   -> Stimulus
   ---
