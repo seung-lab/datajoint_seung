@@ -152,6 +152,10 @@ pinky = dj.create_virtual_module("Seung_pinky", "Seung_pinky")
     - `orientation`: Orientation tuning curve (8 orientations). Value in each orientation is mean over trials.
     - `direction`: Direction tuning curve (16 directions). Valud in each direction is mean over trials.
 
+- Segmentation: Segmentation version.
+    - `segmentation`: Segmentation version.
+    - `timestamp`: Time stamp that segmentation version was generated.
+    
 - Segment: Segments with 10 or more synapses in pinky100.
     - `segment_id`: Segment id in materialization `v185`.
     - `manual_id`: Id of manual masks.
