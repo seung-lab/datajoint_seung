@@ -272,6 +272,13 @@ class Segment(dj.Manual):
 
 
 @pinky
+class white_list(dj.Manual):
+  definition = """
+  -> Segment
+  """
+
+
+@pinky
 class Mesh(dj.Manual):
   definition = """
   # Segment meshes
