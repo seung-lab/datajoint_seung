@@ -272,7 +272,7 @@ class Segment(dj.Manual):
 
 
 @pinky
-class white_list(dj.Manual):
+class WhiteList(dj.Manual):
   definition = """
   -> Segment
   """
