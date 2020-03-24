@@ -125,88 +125,138 @@ class EASETrace(dj.Manual):
 @pinky
 class ManualTuning(dj.Computed):
   definition = """
-  # Tuning curve of manual traces
+  # Tuning curve from manual masks
   -> ManualTrace
   -> Stimulus
   ---
-  tuning_curve: longblob
+  orientation: longblob
+  direction: longblob
   """
 
   def _make_tuples(self, key):
 
-    trace = (ManualTrace() & key).fetch1("trace")
-
+    trace = (ManualTrace() & key).fetch1("spike")
     condition = (Stimulus() & key).fetch1("condition")
-    valid = ~np.isnan(condition)
-    angle_list = np.unique(condition[valid])
-
-    tuning = np.zeros((2,16))
-    for i in range(16):
-
+    
+    valid = ~np.isnan(conditions)
+    angle_list = np.unique(conditions[valid])
+    
+    # Orientation tuning curve
+    orientation_tuning = np.zeros((8,))
+    for i in range(8):
       angle = angle_list[i]
-      section_list = get_section(condition, angle)
+      section_list = get_section(conditions, angle)
 
-      n = 16
-      trace_all = np.ones((len(section_list),n))*np.nan
+      peak_all1 = np.zeros(len(section_list))
       for j in range(len(section_list)):
 
         s = section_list[j]
-          
         trace_section = trace[s[0]:s[1]]
-        trace_all[j,:trace_section.shape[0]] = trace_section
+        peak_all1[j] = np.max(trace_section)
+            
+      angle = angle_list[i+8]
+      section_list = get_section(conditions, angle)
 
-      peak_all = np.nanmax(trace_all, axis=1)
+      peak_all2 = np.zeros(len(section_list))
+      for j in range(len(section_list)):
+
+        s = section_list[j]
+        trace_section = trace[s[0]:s[1]]
+        peak_all2[j] = np.max(trace_section)
+        
+      peak_all = np.concatenate((peak_all1, peak_all2))    
       peak_mean = np.mean(peak_all)
-      peak_std = np.std(peak_all)
-      tuning[0,i] = peak_mean
-      tuning[1,i] = peak_std
+      orientation_tuning[i] = peak_mean
 
-    key["tuning_curve"] = tuning[0,:]
+    # Direction tuning curve
+    direction_tuning = np.zeros((16,))
+    for i in range(16):
+
+      angle = angle_list[i]
+      section_list = get_section(conditions, angle)
+
+      peak_all = np.zeros(len(section_list))
+      for j in range(len(section_list)):
+
+        s = section_list[j]
+        trace_section = trace[s[0]:s[1]]
+        peak_all[j] = np.max(trace_section)
+      
+      peak_mean = np.mean(peak_all)
+      direction_tuning[i] = peak_mean    
+
+    key["orientation"] = orientation_tuning
+    key["direction"] = direction_tuning
 
     self.insert1(key)
-    print("Computed tuning curve for cell {manual_id} in scan {scan_id}, slice {slice_idx}".format(**key))
+    print("Computed tuning curve for cell {manual_id} in scan {scan_id}".format(**key))
 
 
 @pinky
 class EASETuning(dj.Computed):
   definition = """
-  # Tuning curve of EASE traces
+  # Tuning curve from EASE masks
   -> EASETrace
   -> Stimulus
   ---
-  tuning_curve: longblob
+  orientation: longblob
+  direction: longblob
   """
 
   def _make_tuples(self, key):
 
-    trace = (EASETrace() & key).fetch1("trace")
-
+    trace = (EASETrace() & key).fetch1("spike")
     condition = (Stimulus() & key).fetch1("condition")
-    valid = ~np.isnan(condition)
-    angle_list = np.unique(condition[valid])
-
-    tuning = np.zeros((2,16))
-    for i in range(16):
-
+    
+    valid = ~np.isnan(conditions)
+    angle_list = np.unique(conditions[valid])
+    
+    # Orientation tuning curve
+    orientation_tuning = np.zeros((8,))
+    for i in range(8):
       angle = angle_list[i]
-      section_list = get_section(condition, angle)
+      section_list = get_section(conditions, angle)
 
-      n = 16
-      trace_all = np.ones((len(section_list),n))*np.nan
+      peak_all1 = np.zeros(len(section_list))
       for j in range(len(section_list)):
 
         s = section_list[j]
-          
         trace_section = trace[s[0]:s[1]]
-        trace_all[j,:trace_section.shape[0]] = trace_section
+        peak_all1[j] = np.max(trace_section)
+            
+      angle = angle_list[i+8]
+      section_list = get_section(conditions, angle)
 
-      peak_all = np.nanmax(trace_all, axis=1)
+      peak_all2 = np.zeros(len(section_list))
+      for j in range(len(section_list)):
+
+        s = section_list[j]
+        trace_section = trace[s[0]:s[1]]
+        peak_all2[j] = np.max(trace_section)
+        
+      peak_all = np.concatenate((peak_all1, peak_all2))    
       peak_mean = np.mean(peak_all)
-      peak_std = np.std(peak_all)
-      tuning[0,i] = peak_mean
-      tuning[1,i] = peak_std
+      orientation_tuning[i] = peak_mean
 
-    key["tuning_curve"] = tuning[0,:]
+    # Direction tuning curve
+    direction_tuning = np.zeros((16,))
+    for i in range(16):
+
+      angle = angle_list[i]
+      section_list = get_section(conditions, angle)
+
+      peak_all = np.zeros(len(section_list))
+      for j in range(len(section_list)):
+
+        s = section_list[j]
+        trace_section = trace[s[0]:s[1]]
+        peak_all[j] = np.max(trace_section)
+      
+      peak_mean = np.mean(peak_all)
+      direction_tuning[i] = peak_mean    
+
+    key["orientation"] = orientation_tuning
+    key["direction"] = direction_tuning
 
     self.insert1(key)
     print("Computed tuning curve for cell {segment_id} in scan {scan_id}".format(**key))
