@@ -131,18 +131,26 @@ pinky = dj.create_virtual_module("Seung_pinky", "Seung_pinky")
 - ManualMask: Manual masks.
     - `mask`: ROI mask (256 x 256 array). It matches the size of each functional video frame.
 
-- ManualTrace: Traces from manual masks.
+- ManualTrace: Trace from manual mask.
     - `trace_raw`: Raw traces.
     - `trace_detrend`: Detrended traces by high-pass filter.
     - `trace_dff`: Normalized traces (dF/F) where F is the mean of the first Gaussian fit when fitted with mixture of Gaussians of two.
+    - `spike`: Deconvoluted traces using Vogelstein et al., 2009
 
 - ManualTuning: Tuning curve computed from manual trace.
+    - `orientation`: Orientation tuning curve (8 orientations). Value in each orientation is mean over trials.
+    - `direction`: Direction tuning curve (16 directions). Valud in each direction is mean over trials.
 
 - EASEMask: EASE masks.
 
-- EASETrace: Traces from EASE masks.
+- EASETrace: Trace from EASE mask.
+    - `trace_raw`: Raw traces.
+    - `trace`: Denoised and detrended traces.
+    - `spike`: Deconvoluted traces using Vogelstein et al., 2009
 
 - EASETuning: Tuning curve computed from EASE trace.
+    - `orientation`: Orientation tuning curve (8 orientations). Value in each orientation is mean over trials.
+    - `direction`: Direction tuning curve (16 directions). Valud in each direction is mean over trials.
 
 - Segment: Segments with 10 or more synapses in pinky100.
     - `segment_id`: Segment id in materialization `v185`.
