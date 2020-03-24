@@ -138,14 +138,14 @@ class ManualTuning(dj.Computed):
     trace = (ManualTrace() & key).fetch1("spike")
     condition = (Stimulus() & key).fetch1("condition")
     
-    valid = ~np.isnan(conditions)
-    angle_list = np.unique(conditions[valid])
+    valid = ~np.isnan(condition)
+    angle_list = np.unique(condition[valid])
     
     # Orientation tuning curve
     orientation_tuning = np.zeros((8,))
     for i in range(8):
       angle = angle_list[i]
-      section_list = get_section(conditions, angle)
+      section_list = get_section(condition, angle)
 
       peak_all1 = np.zeros(len(section_list))
       for j in range(len(section_list)):
@@ -155,7 +155,7 @@ class ManualTuning(dj.Computed):
         peak_all1[j] = np.max(trace_section)
             
       angle = angle_list[i+8]
-      section_list = get_section(conditions, angle)
+      section_list = get_section(condition, angle)
 
       peak_all2 = np.zeros(len(section_list))
       for j in range(len(section_list)):
@@ -173,7 +173,7 @@ class ManualTuning(dj.Computed):
     for i in range(16):
 
       angle = angle_list[i]
-      section_list = get_section(conditions, angle)
+      section_list = get_section(condition, angle)
 
       peak_all = np.zeros(len(section_list))
       for j in range(len(section_list)):
@@ -208,14 +208,14 @@ class EASETuning(dj.Computed):
     trace = (EASETrace() & key).fetch1("spike")
     condition = (Stimulus() & key).fetch1("condition")
     
-    valid = ~np.isnan(conditions)
-    angle_list = np.unique(conditions[valid])
+    valid = ~np.isnan(condition)
+    angle_list = np.unique(condition[valid])
     
     # Orientation tuning curve
     orientation_tuning = np.zeros((8,))
     for i in range(8):
       angle = angle_list[i]
-      section_list = get_section(conditions, angle)
+      section_list = get_section(condition, angle)
 
       peak_all1 = np.zeros(len(section_list))
       for j in range(len(section_list)):
@@ -225,7 +225,7 @@ class EASETuning(dj.Computed):
         peak_all1[j] = np.max(trace_section)
             
       angle = angle_list[i+8]
-      section_list = get_section(conditions, angle)
+      section_list = get_section(condition, angle)
 
       peak_all2 = np.zeros(len(section_list))
       for j in range(len(section_list)):
@@ -243,7 +243,7 @@ class EASETuning(dj.Computed):
     for i in range(16):
 
       angle = angle_list[i]
-      section_list = get_section(conditions, angle)
+      section_list = get_section(condition, angle)
 
       peak_all = np.zeros(len(section_list))
       for j in range(len(section_list)):
