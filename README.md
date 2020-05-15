@@ -32,8 +32,8 @@ dj.conn()
 ```
 {
     "database.host": "seungdj01.princeton.edu", 
-    "database.password": "your_netid_password", # Need to edit
-    "database.user": "your_netid", # Need to edit
+    "database.password": "your_netid_password", # THIS IS OPTIONAL. If you don't specify it here, it will ask for it when you connect to the database (dj.conn())
+    "database.user": "your_netid", # THIS IS OPTIONAL. # THIS IS OPTIONAL. If you don't specify it here, it will ask for it when you connect to the database (dj.conn())
     "database.port": 3306,
     "database.reconnect": true,
     "connection.init_function": null,
