@@ -326,3 +326,38 @@ class Blurs(dj.Manual):
   hash: bigint unsigned
   zvals: blob
   """
+
+
+@pinky
+class PycSubgraph(dj.Manual):
+    definition = """
+    # Pyramidal subgraph
+    -> Segmentation
+    id: int
+    ---
+    valid: tinyint
+    pre_pt_position: blob
+    pre_pt_supervoxel_id: bigint unsigned
+    pre_pt_root_id: bigint unsigned
+    ctr_pt_position: blob
+    post_pt_position: blob
+    post_pt_supervoxel_id: bigint unsigned
+    post_pt_root_id: bigint unsigned
+    size: int
+    spine_vol: float
+    """
+
+    
+@pinky
+class PotentialPycSubgraph(dj.Manual):
+    definition = """
+    # Potential pyramidal subgraph
+    -> Segmentation
+    id: int
+    ---
+    pre_pt_root_id: bigint unsigned
+    ctr_pt_position: blob
+    post_pt_position: blob
+    size: int
+    n_partner: int
+    """
