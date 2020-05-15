@@ -16,10 +16,8 @@ import datajoint as dj
 
 # Datajoint credentials
 dj.config["database.host"] = "seungdj01.princeton.edu"
-dj.config["database.user"] = "your_netid"
-dj.config["database.password"] = "your_netid_pw"
 
-dj.conn()
+dj.conn() # Then it will ask for your net id and password
 ```
 
 or
