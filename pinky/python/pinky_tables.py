@@ -20,6 +20,16 @@ class Scan(dj.Manual):
   laser_power: int
   wavelength: int
   """
+
+  def to_df(self):
+
+    data = {"scan_id": Scan().fetch("scan_id"),
+            "depth": Scan().fetch("depth"),
+            "laser_power": Scan().fetch("laser_power"),
+            "wavelength": Scan().fetch("wavelength")
+            }
+
+    return pd.DataFrame(data=data)
     
 
 @pinky
@@ -32,6 +42,13 @@ class Slice(dj.Manual):
   depth: int
   """
 
+  def to_df(self):
+
+    data = {"scan_id": Slice().fetch("scan_id"),
+            "slice_idx": Slice().fetch("slice_idx"),
+            "depth": Slice().fetch("depth")
+            }
+
 
 @pinky 
 class Segmentation(dj.Manual):
@@ -41,6 +58,14 @@ class Segmentation(dj.Manual):
   ---
   timestamp: timestamp
   """
+
+  def to_df(self):
+
+    data = {"segmentation": Segmentation().fetch("segmentation"),
+            "timestamp": Segmentation().fetch("timestamp")
+            }
+
+    return pd.DataFrame(data=data)
 
 
 @pinky
@@ -52,6 +77,15 @@ class Neuron(dj.Manual):
   manual_id: int
   """
 
+  def to_df(self):
+
+    data = {"segmentation": Neuron().fetch("segmentation"),
+            "segment_id": Neuron().fetch("segment_id"),
+            "manual_id": Neuron().fetch("manual_id")
+            }
+
+    return pd.DataFrame(data=data)
+
 
 @pinky
 class Soma(dj.Manual):
@@ -59,10 +93,18 @@ class Soma(dj.Manual):
   # Soma information
   -> Neuron
   ---
-  soma_x: int
-  soma_y: int
-  soma_z: int
+  loc: blob
   """
+
+  def to_df(self):
+
+    data = {"segmentation": Soma().fetch("segmentation"),
+            "segment_id": Soma().fetch("segment_id"),
+            "manual_id": Soma().fetch("manual_id"),
+            "loc": Soma().fetch("loc")
+            }
+
+    return pd.DataFrame(data=data)
 
 
 @pinky
