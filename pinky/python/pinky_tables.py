@@ -418,19 +418,19 @@ class PotentialPycSubgraph(dj.Manual):
   ---
   pre_pt_root_id: bigint unsigned
   ctr_pt_position: blob
-  post_pt_root_id: blob
+  post_pt_root_id: bigint unsigned
   size: int
   n_partner: int
   """
     
   def to_df(self):
         
-    data = {"id": PycSubgraph().fetch("id"),
-            "pre_pt_root_id": PycSubgraph().fetch("pre_pt_root_id"),
-            "ctr_pt_position": PycSubgraph().fetch("ctr_pt_position"),
-            "post_pt_root_id": PycSubgraph().fetch("post_pt_root_id"),
-            "size": PycSubgraph().fetch("size"),
-            "n_partner": PycSubgraph().fetch("n_partner")
+    data = {"id": PotentialPycSubgraph().fetch("id"),
+            "pre_pt_root_id": PotentialPycSubgraph().fetch("pre_pt_root_id"),
+            "ctr_pt_position": PotentialPycSubgraph().fetch("ctr_pt_position"),
+            "post_pt_root_id": PotentialPycSubgraph().fetch("post_pt_root_id"),
+            "size": PotentialPycSubgraph().fetch("size"),
+            "n_partner": PotentialPycSubgraph().fetch("n_partner")
            }
         
     return pd.DataFrame(data=data)
