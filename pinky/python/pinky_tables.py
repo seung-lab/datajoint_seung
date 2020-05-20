@@ -1,6 +1,8 @@
 import datajoint as dj
 import numpy as np
 
+import pandas as pd
+
 from utils import get_section
 
 
@@ -347,6 +349,23 @@ class PycSubgraph(dj.Manual):
     spine_vol: float
     """
 
+    def to_df(self):
+        
+        data = {"id": PycSubgraph().fetch("id"),
+                "valid": PycSubgraph().fetch("valid"),
+                "pre_pt_position": PycSubgraph().fetch("pre_pt_position"),
+                "pre_pt_supervoxel_id": PycSubgraph().fetch("pre_pt_supervoxel_id"),
+                "pre_pt_root_id": PycSubgraph().fetch("pre_pt_root_id"),
+                "ctr_pt_position": PycSubgraph().fetch("ctr_pt_position"),
+                "post_pt_position": PycSubgraph().fetch("post_pt_position"),
+                "post_pt_supervoxel_id": PycSubgraph().fetch("post_pt_supervoxel_id"),
+                "post_pt_root_id": PycSubgraph().fetch("post_pt_root_id"),
+                "size": PycSubgraph().fetch("size"),
+                "spine_vol": PycSubgraph().fetch("spine_vol")
+               }
+        
+        return pd.DataFrame(data=data)
+                  
     
 @pinky
 class PotentialPycSubgraph(dj.Manual):
@@ -361,3 +380,15 @@ class PotentialPycSubgraph(dj.Manual):
     size: int
     n_partner: int
     """
+    
+    def to_df(self):
+        
+        data = {"id": PycSubgraph().fetch("id"),
+                "pre_pt_root_id": PycSubgraph().fetch("pre_pt_root_id"),
+                "ctr_pt_position": PycSubgraph().fetch("ctr_pt_position"),
+                "post_pt_root_id": PycSubgraph().fetch("post_pt_root_id"),
+                "size": PycSubgraph().fetch("size"),
+                "n_partner": PycSubgraph().fetch("n_partner")
+               }
+        
+        return pd.DataFrame(data=data)
