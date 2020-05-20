@@ -374,63 +374,63 @@ class Blurs(dj.Manual):
 
 @pinky
 class PycSubgraph(dj.Manual):
-    definition = """
-    # Pyramidal subgraph
-    -> Segmentation
-    id: int
-    ---
-    valid: tinyint
-    pre_pt_position: blob
-    pre_pt_supervoxel_id: bigint unsigned
-    pre_pt_root_id: bigint unsigned
-    ctr_pt_position: blob
-    post_pt_position: blob
-    post_pt_supervoxel_id: bigint unsigned
-    post_pt_root_id: bigint unsigned
-    size: int
-    spine_vol: float
-    """
+  definition = """
+  # Pyramidal subgraph
+  -> Segmentation
+  id: int
+  ---
+  valid: tinyint
+  pre_pt_position: blob
+  pre_pt_supervoxel_id: bigint unsigned
+  pre_pt_root_id: bigint unsigned
+  ctr_pt_position: blob
+  post_pt_position: blob
+  post_pt_supervoxel_id: bigint unsigned
+  post_pt_root_id: bigint unsigned
+  size: int
+  spine_vol: float
+  """
 
-    def to_df(self):
-        
-        data = {"id": PycSubgraph().fetch("id"),
-                "valid": PycSubgraph().fetch("valid"),
-                "pre_pt_position": PycSubgraph().fetch("pre_pt_position"),
-                "pre_pt_supervoxel_id": PycSubgraph().fetch("pre_pt_supervoxel_id"),
-                "pre_pt_root_id": PycSubgraph().fetch("pre_pt_root_id"),
-                "ctr_pt_position": PycSubgraph().fetch("ctr_pt_position"),
-                "post_pt_position": PycSubgraph().fetch("post_pt_position"),
-                "post_pt_supervoxel_id": PycSubgraph().fetch("post_pt_supervoxel_id"),
-                "post_pt_root_id": PycSubgraph().fetch("post_pt_root_id"),
-                "size": PycSubgraph().fetch("size"),
-                "spine_vol": PycSubgraph().fetch("spine_vol")
-               }
-        
-        return pd.DataFrame(data=data)
-                  
+  def to_df(self):
+      
+    data = {"id": PycSubgraph().fetch("id"),
+            "valid": PycSubgraph().fetch("valid"),
+            "pre_pt_position": PycSubgraph().fetch("pre_pt_position"),
+            "pre_pt_supervoxel_id": PycSubgraph().fetch("pre_pt_supervoxel_id"),
+            "pre_pt_root_id": PycSubgraph().fetch("pre_pt_root_id"),
+            "ctr_pt_position": PycSubgraph().fetch("ctr_pt_position"),
+            "post_pt_position": PycSubgraph().fetch("post_pt_position"),
+            "post_pt_supervoxel_id": PycSubgraph().fetch("post_pt_supervoxel_id"),
+            "post_pt_root_id": PycSubgraph().fetch("post_pt_root_id"),
+            "size": PycSubgraph().fetch("size"),
+            "spine_vol": PycSubgraph().fetch("spine_vol")
+           }
+    
+    return pd.DataFrame(data=data)
+                
     
 @pinky
 class PotentialPycSubgraph(dj.Manual):
-    definition = """
-    # Potential pyramidal subgraph
-    -> Segmentation
-    id: int
-    ---
-    pre_pt_root_id: bigint unsigned
-    ctr_pt_position: blob
-    post_pt_position: blob
-    size: int
-    n_partner: int
-    """
+  definition = """
+  # Potential pyramidal subgraph
+  -> Segmentation
+  id: int
+  ---
+  pre_pt_root_id: bigint unsigned
+  ctr_pt_position: blob
+  post_pt_position: blob
+  size: int
+  n_partner: int
+  """
     
-    def to_df(self):
+  def to_df(self):
         
-        data = {"id": PycSubgraph().fetch("id"),
-                "pre_pt_root_id": PycSubgraph().fetch("pre_pt_root_id"),
-                "ctr_pt_position": PycSubgraph().fetch("ctr_pt_position"),
-                "post_pt_root_id": PycSubgraph().fetch("post_pt_root_id"),
-                "size": PycSubgraph().fetch("size"),
-                "n_partner": PycSubgraph().fetch("n_partner")
-               }
+    data = {"id": PycSubgraph().fetch("id"),
+            "pre_pt_root_id": PycSubgraph().fetch("pre_pt_root_id"),
+            "ctr_pt_position": PycSubgraph().fetch("ctr_pt_position"),
+            "post_pt_root_id": PycSubgraph().fetch("post_pt_root_id"),
+            "size": PycSubgraph().fetch("size"),
+            "n_partner": PycSubgraph().fetch("n_partner")
+           }
         
-        return pd.DataFrame(data=data)
+    return pd.DataFrame(data=data)
