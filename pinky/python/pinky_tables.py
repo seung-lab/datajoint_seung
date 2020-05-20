@@ -418,7 +418,7 @@ class PotentialPycSubgraph(dj.Manual):
   ---
   pre_pt_root_id: bigint unsigned
   ctr_pt_position: blob
-  post_pt_position: blob
+  post_pt_root_id: blob
   size: int
   n_partner: int
   """
