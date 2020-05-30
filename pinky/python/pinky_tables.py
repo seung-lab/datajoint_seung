@@ -414,6 +414,7 @@ class PotentialPycSubgraph(dj.Manual):
   definition = """
   # Potential pyramidal subgraph
   -> Segmentation
+  no: int
   id: int
   ---
   pre_pt_root_id: bigint unsigned
@@ -425,7 +426,8 @@ class PotentialPycSubgraph(dj.Manual):
     
   def to_df(self):
         
-    data = {"id": PotentialPycSubgraph().fetch("id"),
+    data = {"no": PotentialPycSubgraph().fetch("no"),
+            "id": PotentialPycSubgraph().fetch("id"),
             "pre_pt_root_id": PotentialPycSubgraph().fetch("pre_pt_root_id"),
             "ctr_pt_position": PotentialPycSubgraph().fetch("ctr_pt_position"),
             "post_pt_root_id": PotentialPycSubgraph().fetch("post_pt_root_id"),

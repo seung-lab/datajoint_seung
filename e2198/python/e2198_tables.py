@@ -7,14 +7,14 @@ e2198 = dj.schema("Seung_e2198")
 
 
 @e2198
-class GC(dj.manual):
+class GC(dj.Manual):
 	definition = """
 	# Retinal ganglion cells
 	cell_id: int
 	segment_id: int
 	function_id: int
 	---
-	cell_type: : varchar(5)
+	cell_type: varchar(5)
 	"""
 
 
