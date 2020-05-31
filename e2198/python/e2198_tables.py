@@ -18,6 +18,16 @@ class GC(dj.Manual):
 	"""
 
 
+@e2198 
+class Segmentation(dj.Manual):
+  definition = """
+  # Segmentation information
+  segmentation: smallint
+  ---
+  timestamp: timestamp
+  """
+
+
 @e2198
 class Segment(dj.Manual):
   definition = """
