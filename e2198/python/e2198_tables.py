@@ -68,6 +68,18 @@ class VoxelizedMesh(dj.Computed):
 
 
 @e2198
+class Blurs(dj.Manual):
+  definition = """
+  # Gaussian blur information
+  version: smallint
+  ---
+  zblur: smallint
+  hash: bigint unsigned
+  zvals: blob
+  """
+
+
+@e2198
 class FootprintsEM(dj.Computed):
   definition = """
   # EM footprints
@@ -80,15 +92,3 @@ class FootprintsEM(dj.Computed):
 
   def _make_tuples(self, key):
     pass
-
-
-@e2198
-class Blurs(dj.Manual):
-  definition = """
-  # Gaussian blur information
-  version: smallint
-  ---
-  zblur: smallint
-  hash: bigint unsigned
-  zvals: blob
-  """
