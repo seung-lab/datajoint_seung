@@ -389,6 +389,7 @@ class PycSubgraph(dj.Manual):
   post_pt_root_id: bigint unsigned
   size: int
   spine_vol: float
+  exclude_conn: int
   """
 
   def to_df(self):
@@ -403,7 +404,8 @@ class PycSubgraph(dj.Manual):
             "post_pt_supervoxel_id": PycSubgraph().fetch("post_pt_supervoxel_id"),
             "post_pt_root_id": PycSubgraph().fetch("post_pt_root_id"),
             "size": PycSubgraph().fetch("size"),
-            "spine_vol": PycSubgraph().fetch("spine_vol")
+            "spine_vol": PycSubgraph().fetch("spine_vol"),
+            "exclude_conn": PycSubgraph().fetch("exclude_conn")
            }
     
     return pd.DataFrame(data=data)
