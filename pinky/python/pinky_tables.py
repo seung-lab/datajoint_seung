@@ -52,7 +52,7 @@ class Treadmill(dj.Manual):
   -> Scan
   ---
   speed: longblob
-  vel = longblob
+  vel: longblob
   """
 
 
