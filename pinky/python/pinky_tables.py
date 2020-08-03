@@ -20,16 +20,6 @@ class Scan(dj.Manual):
   laser_power: int
   wavelength: int
   """
-
-  def to_df(self):
-
-    data = {"scan_id": Scan().fetch("scan_id"),
-            "depth": Scan().fetch("depth"),
-            "laser_power": Scan().fetch("laser_power"),
-            "wavelength": Scan().fetch("wavelength")
-            }
-
-    return pd.DataFrame(data=data)
     
 
 @pinky
@@ -41,13 +31,29 @@ class Slice(dj.Manual):
   ---
   depth: int
   """
+    
+    
+@pinky
+class Pupil(dj.Manual):
+  definition = """
+  # Pupil position and size
+  -> Scan
+  ---
+  pupil_r: longblob
+  pupil_x: longblob
+  pupil_y: longblob
+  """
 
-  def to_df(self):
 
-    data = {"scan_id": Slice().fetch("scan_id"),
-            "slice_idx": Slice().fetch("slice_idx"),
-            "depth": Slice().fetch("depth")
-            }
+@pinky
+class Treadmill(dj.Manual):
+  definition = """
+  # Treadmill activity
+  -> Scan
+  ---
+  speed: longblob
+  vel = longblob
+  """
 
 
 @pinky 
@@ -59,14 +65,6 @@ class Segmentation(dj.Manual):
   timestamp: timestamp
   """
 
-  def to_df(self):
-
-    data = {"segmentation": Segmentation().fetch("segmentation"),
-            "timestamp": Segmentation().fetch("timestamp")
-            }
-
-    return pd.DataFrame(data=data)
-
 
 @pinky
 class Neuron(dj.Manual):
@@ -77,15 +75,6 @@ class Neuron(dj.Manual):
   manual_id: int
   """
 
-  def to_df(self):
-
-    data = {"segmentation": Neuron().fetch("segmentation"),
-            "segment_id": Neuron().fetch("segment_id"),
-            "manual_id": Neuron().fetch("manual_id")
-            }
-
-    return pd.DataFrame(data=data)
-
 
 @pinky
 class Soma(dj.Manual):
@@ -95,16 +84,6 @@ class Soma(dj.Manual):
   ---
   loc: blob
   """
-
-  def to_df(self):
-
-    data = {"segmentation": Soma().fetch("segmentation"),
-            "segment_id": Soma().fetch("segment_id"),
-            "manual_id": Soma().fetch("manual_id"),
-            "loc": Soma().fetch("loc")
-            }
-
-    return pd.DataFrame(data=data)
 
 
 @pinky
@@ -391,24 +370,6 @@ class PycSubgraph(dj.Manual):
   spine_vol: float
   exclude_conn: int
   """
-
-  def to_df(self):
-      
-    data = {"id": PycSubgraph().fetch("id"),
-            "valid": PycSubgraph().fetch("valid"),
-            "pre_pt_position": PycSubgraph().fetch("pre_pt_position"),
-            "pre_pt_supervoxel_id": PycSubgraph().fetch("pre_pt_supervoxel_id"),
-            "pre_pt_root_id": PycSubgraph().fetch("pre_pt_root_id"),
-            "ctr_pt_position": PycSubgraph().fetch("ctr_pt_position"),
-            "post_pt_position": PycSubgraph().fetch("post_pt_position"),
-            "post_pt_supervoxel_id": PycSubgraph().fetch("post_pt_supervoxel_id"),
-            "post_pt_root_id": PycSubgraph().fetch("post_pt_root_id"),
-            "size": PycSubgraph().fetch("size"),
-            "spine_vol": PycSubgraph().fetch("spine_vol"),
-            "exclude_conn": PycSubgraph().fetch("exclude_conn")
-           }
-    
-    return pd.DataFrame(data=data)
                 
     
 @pinky
@@ -425,16 +386,3 @@ class PotentialPycSubgraph(dj.Manual):
   size: int
   n_partner: int
   """
-    
-  def to_df(self):
-        
-    data = {"no": PotentialPycSubgraph().fetch("no"),
-            "id": PotentialPycSubgraph().fetch("id"),
-            "pre_pt_root_id": PotentialPycSubgraph().fetch("pre_pt_root_id"),
-            "ctr_pt_position": PotentialPycSubgraph().fetch("ctr_pt_position"),
-            "post_pt_root_id": PotentialPycSubgraph().fetch("post_pt_root_id"),
-            "size": PotentialPycSubgraph().fetch("size"),
-            "n_partner": PotentialPycSubgraph().fetch("n_partner")
-           }
-        
-    return pd.DataFrame(data=data)
