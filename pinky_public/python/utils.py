@@ -28,3 +28,11 @@ def str2array(s):
             array.append(int(e))
             
     return np.array(array)
+
+
+def div0(n, d):
+    
+    if d == 0:
+        return 0
+    else:
+        return n/d

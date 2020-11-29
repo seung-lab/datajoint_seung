@@ -3,7 +3,7 @@ import numpy as np
 
 import pandas as pd
 
-from utils import get_section
+from utils import get_section, div0
 
 
 # Schema pinky
@@ -87,6 +87,65 @@ class Soma(dj.Manual):
 
 
 @pinky
+class Neurite(dj.Manual):
+  definition = """
+  # Axon, dendrite information
+  -> Neuron
+  ---
+  axon_len: float
+  dendrite_len: float
+  """
+
+
+@pinky
+class SynDegree(dj.Manual):
+  definition = """
+  # Synapse, connection degree
+  -> Neuron
+  ---
+  syn_out_deg: int
+  syn_in_deg: int
+  conn_out_deg: int
+  conn_in_deg: int
+  total_syn_out_deg: int
+  total_syn_in_deg: int
+  """
+
+
+@pinky
+class SynDensity(dj.Computed):
+  definition = """
+  # Synapse, connection density
+  -> Neurite
+  -> SynDegree
+  ---
+  syn_out_dens: float
+  syn_in_dens: float
+  conn_out_dens: float
+  conn_in_dens: float
+  total_syn_out_deg: float
+  total_syn_in_deg: float
+  """
+
+  def _make_tuples(self, key):
+    
+    axon_len = (Neurite() & key).fetch1("axon_len")
+    dend_len = (Neurite() & key).fetch1("dendrite_len")
+    
+    deg_list = (SynDegree() & key).fetch()
+    
+    key["syn_out_dens"] = div0(deg_list[0][3],axon_len)
+    key["syn_in_dens"] = div0(deg_list[0][4],dend_len)
+    key["conn_out_dens"] = div0(deg_list[0][5],axon_len)
+    key["conn_in_dens"] = div0(deg_list[0][6],dend_len)
+    key["total_syn_out_deg"] = div0(deg_list[0][7],axon_len)
+    key["total_syn_in_deg"] = div0(deg_list[0][8],dend_len)
+
+    self.insert1(key)
+    print("Computed synapse density for cell {segment_id}.".format(**key))
+  
+
+@pinky
 class ManualMask(dj.Manual):
   definition = """
   # Manual ROI masks
@@ -95,17 +154,6 @@ class ManualMask(dj.Manual):
   ---
   mask: longblob
   """
-
-
-# @pinky
-# class EASEMask(dj.Manual):
-#   definition = """
-#   # EASE ROI masks
-#   -> Slice
-#   -> Neuron
-#   ---
-#   mask: longblob
-#   """
 
 
 @pinky
