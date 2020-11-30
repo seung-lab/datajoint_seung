@@ -1,7 +1,23 @@
-# datajoint_seung
-Datajoint databases in Seung Lab.
+# DataJoint - Seung Lab
+Datajoint schemas provided by Seung Lab.
 
-## Database configuration
+### Installation
+DataJoint for Python requires Python 3.4 or above to function properly.
+```
+pip3 install datajoint
+```
+For more information, please checkout the [DataJoint Tutorials](https://tutorials.datajoint.io/setting-up/datajoint-python.html).  
+
+### DataJoint database
+### Database configuration
+#### Public database
+- HOST: datajoint.ninai.org
+- USER: Given after registration
+- PASSWORD: Given after registration
+
+You need to be registered to access the database. Please fill out the [registration form](https://forms.gle/6SeDGRT8zoLqpbfU9) to receive user id and password.
+
+#### Local database
 Database location: Princeton Neuroscience Institute, Princeton University
 
 - HOST: seungdj01.princeton.edu
@@ -28,8 +44,8 @@ dj.config.load("dj_conf.json")
 dj.conn()
 ```
 
-#### dj_conf.json
-```
+#### <details><summary>dj_conf.json</summary><p>  
+```python3
 {
     "database.host": "seungdj01.princeton.edu", 
     "database.password": "your_netid_password", # THIS IS OPTIONAL. If you don't specify it here, it will ask for it when you connect to the database (dj.conn())
@@ -48,6 +64,8 @@ dj.conn()
     ]
 }
 ```
+</p>
+</details>
 
 ## Pinky
 ```
