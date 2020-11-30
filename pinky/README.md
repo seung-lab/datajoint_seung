@@ -64,14 +64,6 @@
     - `vertices`: Mesh vertices [nm].
     - `triangles`: Triangle connectivity (python indexing).
     
-    
-## Pinky40
-```
-pinky40 = dj.create_virtual_module("Seung_pinky40", "Seung_pinky40")
-```
-
-### Schema ERD
-![](pinky40/pinky40_ERD.png)
 
 ### Tables
 - Scan: Scan information of functional scans Baylor recorded. Total of 9 scans exist.
