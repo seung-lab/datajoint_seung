@@ -67,10 +67,24 @@ dj.conn()
 ```
 </details>
 
-## Pinky
+## Pinky (Public)
+```
+pinky = dj.create_virtual_module("seung_pinky", "seung_pinky")
+```
+
+## Pinky (Local)
 ```
 pinky = dj.create_virtual_module("Seung_pinky", "Seung_pinky")
 ```
 
 ### Schema ERD
 ![](pinky/pinky_ERD.png)
+
+
+## Pinky40
+```
+pinky40 = dj.create_virtual_module("Seung_pinky40", "Seung_pinky40")
+```
+
+### Schema ERD
+![](pinky40/pinky40_ERD.png)
