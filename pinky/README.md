@@ -1,4 +1,4 @@
-# Schema Pinky (Local)
+# Pinky (Local)
 
 ### Tables
 - Scan: Scan information of functional scans Baylor recorded. Total of 9 scans exist.
