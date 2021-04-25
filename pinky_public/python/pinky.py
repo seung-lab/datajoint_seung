@@ -103,12 +103,12 @@ class SynDegree(dj.Manual):
   # Synapse, connection degree
   -> Neuron
   ---
-  syn_out_deg: int
-  syn_in_deg: int
-  conn_out_deg: int
-  conn_in_deg: int
-  total_syn_out_deg: int
-  total_syn_in_deg: int
+  outsyn_deg: int
+  insyn_deg: int
+  outconn_deg: int
+  inconn_deg: int
+  total_outsyn_deg: int
+  total_insyn_deg: int
   """
 
 
@@ -119,12 +119,12 @@ class SynDensity(dj.Computed):
   -> Neurite
   -> SynDegree
   ---
-  syn_out_dens: float
-  syn_in_dens: float
-  conn_out_dens: float
-  conn_in_dens: float
-  total_syn_out_deg: float
-  total_syn_in_deg: float
+  outsyn_dens: float
+  insyn_dens: float
+  outconn_dens: float
+  inconn_dens: float
+  total_outsyn_dens: float
+  total_insyn_dens: float
   """
 
   def _make_tuples(self, key):
@@ -134,12 +134,12 @@ class SynDensity(dj.Computed):
     
     deg_list = (SynDegree() & key).fetch()
     
-    key["syn_out_dens"] = div0(deg_list[0][3],axon_len)
-    key["syn_in_dens"] = div0(deg_list[0][4],dend_len)
-    key["conn_out_dens"] = div0(deg_list[0][5],axon_len)
-    key["conn_in_dens"] = div0(deg_list[0][6],dend_len)
-    key["total_syn_out_deg"] = div0(deg_list[0][7],axon_len)
-    key["total_syn_in_deg"] = div0(deg_list[0][8],dend_len)
+    key["outsyn_dens"] = div0(deg_list[0][3],axon_len)
+    key["insyn_dens"] = div0(deg_list[0][4],dend_len)
+    key["outconn_dens"] = div0(deg_list[0][5],axon_len)
+    key["inconn_dens"] = div0(deg_list[0][6],dend_len)
+    key["total_outsyn_dens"] = div0(deg_list[0][7],axon_len)
+    key["total_insyn_dens"] = div0(deg_list[0][8],dend_len)
 
     self.insert1(key)
     print("Computed synapse density for cell {segment_id}.".format(**key))
