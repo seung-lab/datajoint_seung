@@ -174,8 +174,7 @@ class ManualTrace(dj.Manual):
   -> ManualMask
   ---
   trace_raw: longblob
-  trace_detrend: longblob
-  trace_dff: longblob
+  trace: longblob
   spike: longblob
   """
   
