@@ -103,12 +103,12 @@ class SynDegree(dj.Manual):
   # Synapse, connection degree
   -> Neuron
   ---
-  syn_out_deg: int
-  syn_in_deg: int
-  conn_out_deg: int
-  conn_in_deg: int
-  total_syn_out_deg: int
-  total_syn_in_deg: int
+  outsyn_deg: int
+  insyn_deg: int
+  outconn_deg: int
+  inconn_deg: int
+  total_outsyn_deg: int
+  total_insyn_deg: int
   """
 
 
@@ -119,12 +119,12 @@ class SynDensity(dj.Computed):
   -> Neurite
   -> SynDegree
   ---
-  syn_out_dens: float
-  syn_in_dens: float
-  conn_out_dens: float
-  conn_in_dens: float
-  total_syn_out_deg: float
-  total_syn_in_deg: float
+  outsyn_dens: float
+  insyn_dens: float
+  outconn_dens: float
+  inconn_dens: float
+  total_outsyn_dens: float
+  total_insyn_dens: float
   """
 
   def _make_tuples(self, key):
@@ -134,12 +134,12 @@ class SynDensity(dj.Computed):
     
     deg_list = (SynDegree() & key).fetch()
     
-    key["syn_out_dens"] = div0(deg_list[0][3],axon_len)
-    key["syn_in_dens"] = div0(deg_list[0][4],dend_len)
-    key["conn_out_dens"] = div0(deg_list[0][5],axon_len)
-    key["conn_in_dens"] = div0(deg_list[0][6],dend_len)
-    key["total_syn_out_deg"] = div0(deg_list[0][7],axon_len)
-    key["total_syn_in_deg"] = div0(deg_list[0][8],dend_len)
+    key["outsyn_dens"] = div0(deg_list[0][3],axon_len)
+    key["insyn_dens"] = div0(deg_list[0][4],dend_len)
+    key["outconn_dens"] = div0(deg_list[0][5],axon_len)
+    key["inconn_dens"] = div0(deg_list[0][6],dend_len)
+    key["total_outsyn_dens"] = div0(deg_list[0][7],axon_len)
+    key["total_insyn_dens"] = div0(deg_list[0][8],dend_len)
 
     self.insert1(key)
     print("Computed synapse density for cell {segment_id}.".format(**key))
@@ -192,74 +192,18 @@ class EASETrace(dj.Manual):
   """
 
 
-# @pinky
-# class ManualTuning(dj.Computed):
-#   definition = """
-#   # Tuning curve from manual traces
-#   -> ManualTrace
-#   -> Stimulus
-#   ---
-#   orientation: longblob
-#   direction: longblob
-#   """
-
-#   def _make_tuples(self, key):
-
-#     trace = (ManualTrace() & key).fetch1("spike")
-#     condition = (Stimulus() & key).fetch1("condition")
-    
-#     valid = ~np.isnan(condition)
-#     angle_list = np.unique(condition[valid])
-    
-#     # Orientation tuning curve
-#     orientation_tuning = np.zeros((8,))
-#     for i in range(8):
-#       angle = angle_list[i]
-#       section_list = get_section(condition, angle)
-
-#       peak_all1 = np.zeros(len(section_list))
-#       for j in range(len(section_list)):
-
-#         s = section_list[j]
-#         trace_section = trace[s[0]:s[1]]
-#         peak_all1[j] = np.max(trace_section)
-            
-#       angle = angle_list[i+8]
-#       section_list = get_section(condition, angle)
-
-#       peak_all2 = np.zeros(len(section_list))
-#       for j in range(len(section_list)):
-
-#         s = section_list[j]
-#         trace_section = trace[s[0]:s[1]]
-#         peak_all2[j] = np.max(trace_section)
-        
-#       peak_all = np.concatenate((peak_all1, peak_all2))    
-#       peak_mean = np.mean(peak_all)
-#       orientation_tuning[i] = peak_mean
-
-#     # Direction tuning curve
-#     direction_tuning = np.zeros((16,))
-#     for i in range(16):
-
-#       angle = angle_list[i]
-#       section_list = get_section(condition, angle)
-
-#       peak_all = np.zeros(len(section_list))
-#       for j in range(len(section_list)):
-
-#         s = section_list[j]
-#         trace_section = trace[s[0]:s[1]]
-#         peak_all[j] = np.max(trace_section)
-      
-#       peak_mean = np.mean(peak_all)
-#       direction_tuning[i] = peak_mean    
-
-#     key["orientation"] = orientation_tuning
-#     key["direction"] = direction_tuning
-
-#     self.insert1(key)
-#     print("Computed tuning curve for cell {manual_id} in scan {scan_id}".format(**key))
+@pinky
+class EASETuning(dj.Manual):
+	definition = """
+	# Tuning curve from EASE traces
+	-> EASETrace
+	---
+	tune_curve: longblob
+	osi: float
+	osi_p: float
+	dsi: float
+	dsi_p: float
+	"""
 
 
 # @pinky
